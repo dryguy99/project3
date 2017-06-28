@@ -1,28 +1,30 @@
 // Include React
 import React from "react"
 // Here we include all of the sub-components
-
+import {Link, Route, BrowserRouter as Router} from 'react-router-dom';
+import HomeLogin from './HomeLogin';
+import Login from './Login';
+import StartPage from './StartPage';
 // Creating the Main component
-class Main extends React.Component {
+class Main extends Component {
 
     constructor(props) {
         super(props);
         // Here we set a generic state associated with the number of clicks
         // Note how we added in this history state variable
-
     }
-
-    // The moment the page renders get the History
-
-    // If the component changes (i.e. if a search is entered)...
 
     // Here we render the function
     render() {
         return (
+          <Router>
             <div className="container">
               {this.props.children}
-
+              <Route exact path="/" component={StartPage}/>
+              <Route path="/login" component={Login}/>
+              <Route path="/oauth" component={HomeLogin}/>
             </div>
+          </Router>
         );
     }
 }

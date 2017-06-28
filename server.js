@@ -11,8 +11,13 @@ var flash    = require('connect-flash');
 var morgan       = require('morgan');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
-var configDB = require('./src/config/database.js');
+var configDB = require('./react-src/config/database.js');
 var path = require('path');
+var fs = require('fs');
+var multer = require('multer');
+var upload = multer({dest:'./uploads'});
+var sharp = require('sharp');
+
 mongoose.Promise = Promise;
 
 app.use(function(req, res, next) {
@@ -34,7 +39,7 @@ if (!process.env.MONGODB_URI){
         mongoose.connect(process.env.MONGODB_URI)
     }
 
-require('./src/config/passport')(passport); // pass passport for configuration
+require('./react-src/config/passport')(passport); // pass passport for configuration
 
 // set up our express application
 app.use(morgan('dev')); // log every request to the console
@@ -54,7 +59,7 @@ app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
 // routes ======================================================================
-require('./src/app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
+require('./react-src/oauth/oauth-routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
 
 
 

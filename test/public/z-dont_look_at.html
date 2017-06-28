@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	   <meta charset ="utf-8">
+	 <title></title>
+                <style type="text/css">
+                	
+                	body{
+                		text-align: center;
+                	}
+             </style>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+	 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	</head>
+	<body>
+<video id="video" width="640" height="480" autoplay></video>
+<button id="snap">Snap Photo</button>
+<canvas id="canvas" width="640" height="480"></canvas>
+<div id="img"></div>
+
+	</body>
+
+	<script>
+	var s;
+var video = document.getElementById('video');
+$("#video").css("border","3px solid black")
+
+// Get access to the camera!
+if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+    // Not adding `{ audio: true }` since we only want video now
+    navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
+        video.src = window.URL.createObjectURL(stream);
+        video.play();
+
+        console.log(stream)
+    });
+}
+
+var canvas = document.getElementById('canvas');
+var context = canvas.getContext('2d');
+var video = document.getElementById('video');
+
+// Trigger photo take
+document.getElementById("snap").addEventListener("click", function() {
+	context.drawImage(video, 0, 0, 640, 480);
+	var dataUrl = $("video").attr("src")
+	console.log(video)
+	console.log(dataUrl)
+	s= dataUrl;
+
+// var
+// 	$.ajax({
+//   method: "GET",
+//   url: "/uploads/" + Imgurl
+//     }).done(function(data) {
+// });
+$("#video").hide();
+})
+
+	</script>

@@ -1,10 +1,9 @@
 // Include the React library
-import React from "react";
-
+import React, {Component} from "react";
 // Include the react-router module
-import router from "react-router";
 
 // Include the Route component for displaying individual routes
+console.log("router.Route: " + router.Route);
 var Route = router.Route;
 
 // Include the Router component to contain all our Routes
@@ -19,7 +18,7 @@ var hashHistory = router.hashHistory;
 var IndexRoute = router.IndexRoute;
 
 // Reference the high-level components
-var Main = require("../App");
+import Main from "./app";
 // var Profile = require("../components/Profile");
 // var Signup = require("../components/LocalSignup");
 // var Login = require("../components/LocalLogin");
